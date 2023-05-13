@@ -25,6 +25,18 @@ class SetURLCommand(commands.Cog):
         # return the bucket
         return s3_client
     
+    # Format the schedule - convert to cron expression
+    async def format_schedule(self, hour, minute):
+        # convert to int
+        hour = int(hour)
+        minute = int(minute)  
+
+        hour = hour - 1 # lol, trust me this is how eventBridge works
+        # convert to cron expression          
+        cron_expression = f'cron(0/{minute} * * * ? *)'
+
+        return cron_expression
+
     # Save change to the database
     async def save_to_database(self, user_id, url, schedule):
         # get the bucket
@@ -110,8 +122,11 @@ class SetURLCommand(commands.Cog):
                     # Get the user id
                     user_id = interation.user.id
 
+                    # Format the Schedule
+                    schedule = await self.format_schedule(hour=hour.value, minute=minute.value)
+
                     # Save the data to the database
-                    await self.save_to_database(user_id=user_id, url=url, schedule=f'{hour.name}:{minute.name}')
+                    await self.save_to_database(user_id=user_id, url=url, schedule=schedule)
 
                     await interation.followup.send('URL has been set')
                 else:
