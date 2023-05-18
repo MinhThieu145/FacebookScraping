@@ -4,6 +4,7 @@ from discord.ext import commands
 from discord import app_commands
 
 import boto3
+from datetime import datetime
 
 # import selenium
 from selenium import webdriver
@@ -25,20 +26,10 @@ class SetURLCommand(commands.Cog):
         # return the bucket
         return s3_client
     
-    # Format the schedule - convert to cron expression
-    async def format_schedule(self, hour, minute):
-        # convert to int
-        hour = int(hour)
-        minute = int(minute)  
-
-        hour = hour - 1 # lol, trust me this is how eventBridge works
-        # convert to cron expression          
-        cron_expression = f'cron(0/{minute} * * * ? *)'
-
-        return cron_expression
 
     # Save change to the database
-    async def save_to_database(self, user_id, url, schedule):
+    async def save_to_database(self, user_id, channel_id ,url, hour, minute):
+
         # get the bucket
         client = await self.connect_to_database()
 
@@ -46,7 +37,7 @@ class SetURLCommand(commands.Cog):
         client.download_file('facebook-crawler-data', 'url_data.csv', 'url_data.csv')
 
         # create new line
-        new_line = f'{user_id},{url},{schedule}\n'
+        new_line = f'{user_id}, {channel_id} , {url},{hour},{minute}\n'
 
         # append the new line to the file
         with open('url_data.csv', 'a') as f:
@@ -93,7 +84,7 @@ class SetURLCommand(commands.Cog):
         app_commands.Choice(name='0', value='0'),
         app_commands.Choice(name='15', value='15'),
         app_commands.Choice(name='30', value='30'),
-        app_commands.Choice(name='60', value='60'),
+        app_commands.Choice(name='45', value='45'),
     ])        
     
     async def seturl(self, interation: discord.Interaction, url: str, hour: app_commands.Choice[str], minute: app_commands.Choice[str]):
@@ -122,11 +113,12 @@ class SetURLCommand(commands.Cog):
                     # Get the user id
                     user_id = interation.user.id
 
-                    # Format the Schedule
-                    schedule = await self.format_schedule(hour=hour.value, minute=minute.value)
+                    # get the channel id
+                    channel_id = interation.channel.id
+
 
                     # Save the data to the database
-                    await self.save_to_database(user_id=user_id, url=url, schedule=schedule)
+                    await self.save_to_database(user_id=user_id, url=url, channel_id=channel_id ,hour=hour.value, minute=minute.value)
 
                     await interation.followup.send('URL has been set')
                 else:

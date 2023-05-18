@@ -1,2 +1,6 @@
-UserID,URL,Schedule
-681743807649546272,https://www.youtube.com/watch?v=0TQd2DitErE,cron(0/30 0/1 * * ? *)
+UserID,ChannelID,URL,Hour,Minute
+681743807649546272, 1083640013180387352 , https://www.youtube.com/watch?v=4Yq16yOZipc,1,15
+681743807649546272, 1083640013180387352 , https://www.youtube.com/watch?v=4Yq16yOZipc,2,30
+681743807649546272, 1083640013180387352 , https://www.youtube.com/watch?v=GuARE76HIEo,1,0
+681743807649546272, 1083640013180387352 , https://medium.com/quantrium-tech/top-3-packages-for-named-entity-recognition-e9e14f6f0a2a,1,15
+681743807649546272, 1083640013180387352 , https://www.facebook.com/marketplace/tampa/search?sortBy=creation_time_descend&query=car&exact=false,1,15

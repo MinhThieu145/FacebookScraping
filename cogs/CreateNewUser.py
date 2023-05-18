@@ -36,8 +36,9 @@ class CreateNewUser(commands.Cog):
             # create new line
             current_date = datetime.now().strftime("%Y-%m-%d")
             username = interation.user.name
-            password = interation.user.id
-            new_line = f'{current_date},{username},{password}\n'
+            user_id = interation.user.id
+            channel_id = interation.channel_id
+            new_line = f'{current_date},{username},{user_id}, {channel_id}\n'
 
             # append the new line to the file
             with open('user_data.csv', 'a') as f:

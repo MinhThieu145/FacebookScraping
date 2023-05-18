@@ -12,7 +12,7 @@ GUILD_ID = 1083640013180387349
 class Client(commands.Bot):
     def __init__(self):
         super().__init__(command_prefix= commands.when_mentioned ,intents= discord.Intents.default())
-        self.cog_list = ['cogs.PingCommand', 'cogs.ReactionCommand', 'cogs.SetURLCommand', 'cogs.CreateNewUser']
+        self.cog_list = ['cogs.PingCommand', 'cogs.ReactionCommand', 'cogs.SetURLCommand', 'cogs.CreateNewUser','cogs.TestScraping']
 
     async def setup_hook(self):
         for ext in self.cog_list:
