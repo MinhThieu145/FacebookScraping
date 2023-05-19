@@ -92,11 +92,11 @@ class SetURLCommand(commands.Cog):
             await interation.response.defer(thinking=True)
             
             # call the function to get the screenshot
-            await self.get_screenshot(url)
 
             embed = discord.Embed(title='Is this the result you want', description='Setting the URL for the crawler', color=discord.Color.green())
             embed.add_field(name='URL', value=url, inline=False)
-            embed.set_image(url='attachment://screenshot.png')
+            embed.add_field(name='Click the link to view the preview', value='[Preview](https://facebook-crawler-data.s3.amazonaws.com/website.pdf)', inline=False)
+
             message = await interation.followup.send(embed=embed, file=discord.File('screenshot.png'))
             await message.add_reaction('👍')
             await message.add_reaction('👎')
