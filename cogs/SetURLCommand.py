@@ -90,7 +90,7 @@ class SetURLCommand(commands.Cog):
             embed.add_field(name='URL', value=url, inline=False)
             embed.add_field(name='Click the link to view the preview', value='[Preview](https://facebook-crawler-data.s3.amazonaws.com/website.pdf)', inline=False)
 
-            message = await interation.followup.send(embed=embed, file=discord.File('screenshot.png'))
+            message = await interation.followup.send(embed=embed)
             await message.add_reaction('👍')
             await message.add_reaction('👎')
             
