@@ -6,13 +6,6 @@ from discord import app_commands
 import boto3
 from datetime import datetime
 
-# import selenium
-from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 
 import time
 
@@ -69,23 +62,23 @@ class SetURLCommand(commands.Cog):
     #     # close the driver
     #     driver.quit()
 
-    # @app_commands.command(name='seturl', description='Set the URL you want to scrap and the schedule you want it to run')
-    # @app_commands.describe(hour='Will repeat every x hour', minute ='Will repeat every x minute')
-    # @app_commands.choices(hour = [ 
-    #     app_commands.Choice(name='1', value='1'),
-    #     app_commands.Choice(name='2', value='2'),
-    #     app_commands.Choice(name='3', value='3'),
-    #     app_commands.Choice(name='4', value='4'),
-    #     app_commands.Choice(name='5', value='5'),
-    # ])
+    @app_commands.command(name='seturl', description='Set the URL you want to scrap and the schedule you want it to run')
+    @app_commands.describe(hour='Will repeat every x hour', minute ='Will repeat every x minute')
+    @app_commands.choices(hour = [ 
+        app_commands.Choice(name='1', value='1'),
+        app_commands.Choice(name='2', value='2'),
+        app_commands.Choice(name='3', value='3'),
+        app_commands.Choice(name='4', value='4'),
+        app_commands.Choice(name='5', value='5'),
+    ])
 
-    # # only 0, 15, 30 and 60 for minute
-    # @app_commands.choices(minute = [
-    #     app_commands.Choice(name='0', value='0'),
-    #     app_commands.Choice(name='15', value='15'),
-    #     app_commands.Choice(name='30', value='30'),
-    #     app_commands.Choice(name='45', value='45'),
-    # ])        
+    # only 0, 15, 30 and 60 for minute
+    @app_commands.choices(minute = [
+        app_commands.Choice(name='0', value='0'),
+        app_commands.Choice(name='15', value='15'),
+        app_commands.Choice(name='30', value='30'),
+        app_commands.Choice(name='45', value='45'),
+    ])        
     
     async def seturl(self, interation: discord.Interaction, url: str, hour: app_commands.Choice[str], minute: app_commands.Choice[str]):
         try:
