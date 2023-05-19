@@ -46,46 +46,46 @@ class SetURLCommand(commands.Cog):
         # upload the file to the bucket
         client.upload_file('url_data.csv', 'facebook-crawler-data', 'url_data.csv')
 
-    # a function to see a screen shot of the website
-    async def get_screenshot(self, url):
-        # set up chrome driver
-        chrome_options = Options()
-        chrome_options.add_argument("--headless")
-        chrome_options.add_argument("--window-size=1920x1080")
-        chrome_options.add_argument("--disable-gpu")
+    # # a function to see a screen shot of the website
+    # async def get_screenshot(self, url):
+    #     # set up chrome driver
+    #     chrome_options = Options()
+    #     chrome_options.add_argument("--headless")
+    #     chrome_options.add_argument("--window-size=1920x1080")
+    #     chrome_options.add_argument("--disable-gpu")
 
-        # set up driver
-        driver = webdriver.Chrome(options=chrome_options, executable_path='chromedriver.exe')
+    #     # set up driver
+    #     driver = webdriver.Chrome(options=chrome_options, executable_path='chromedriver.exe')
 
-        # get the url
-        driver.get(url)
+    #     # get the url
+    #     driver.get(url)
 
-        # wait for the page to load
-        time.sleep(2)
+    #     # wait for the page to load
+    #     time.sleep(2)
 
-        # take a screenshot
-        driver.save_screenshot('screenshot.png')
+    #     # take a screenshot
+    #     driver.save_screenshot('screenshot.png')
 
-        # close the driver
-        driver.quit()
+    #     # close the driver
+    #     driver.quit()
 
-    @app_commands.command(name='seturl', description='Set the URL you want to scrap and the schedule you want it to run')
-    @app_commands.describe(hour='Will repeat every x hour', minute ='Will repeat every x minute')
-    @app_commands.choices(hour = [ 
-        app_commands.Choice(name='1', value='1'),
-        app_commands.Choice(name='2', value='2'),
-        app_commands.Choice(name='3', value='3'),
-        app_commands.Choice(name='4', value='4'),
-        app_commands.Choice(name='5', value='5'),
-    ])
+    # @app_commands.command(name='seturl', description='Set the URL you want to scrap and the schedule you want it to run')
+    # @app_commands.describe(hour='Will repeat every x hour', minute ='Will repeat every x minute')
+    # @app_commands.choices(hour = [ 
+    #     app_commands.Choice(name='1', value='1'),
+    #     app_commands.Choice(name='2', value='2'),
+    #     app_commands.Choice(name='3', value='3'),
+    #     app_commands.Choice(name='4', value='4'),
+    #     app_commands.Choice(name='5', value='5'),
+    # ])
 
-    # only 0, 15, 30 and 60 for minute
-    @app_commands.choices(minute = [
-        app_commands.Choice(name='0', value='0'),
-        app_commands.Choice(name='15', value='15'),
-        app_commands.Choice(name='30', value='30'),
-        app_commands.Choice(name='45', value='45'),
-    ])        
+    # # only 0, 15, 30 and 60 for minute
+    # @app_commands.choices(minute = [
+    #     app_commands.Choice(name='0', value='0'),
+    #     app_commands.Choice(name='15', value='15'),
+    #     app_commands.Choice(name='30', value='30'),
+    #     app_commands.Choice(name='45', value='45'),
+    # ])        
     
     async def seturl(self, interation: discord.Interaction, url: str, hour: app_commands.Choice[str], minute: app_commands.Choice[str]):
         try:
