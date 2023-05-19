@@ -82,7 +82,7 @@ class SetURLCommand(commands.Cog):
     
     async def seturl(self, interation: discord.Interaction, url: str, hour: app_commands.Choice[str], minute: app_commands.Choice[str]):
         try:
-            # await interation.response.defer(thinking=True)
+            await interation.response.defer(thinking=True)
             
             # call the function to get the screenshot
 
