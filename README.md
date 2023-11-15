@@ -31,4 +31,5 @@ This project involves the development of an automated data pipeline designed to 
 - **AWS Service Interaction:** Utilizes boto3 library in Python for interacting with various AWS services, enhancing the bot's capabilities in data management and scheduling.
 
 ### Demo Video
-![Demo](FacebookScrapingDemo.mp4)
+https://github.com/MinhThieu145/FacebookScraping/assets/88282475/1295bc45-268e-4140-b4b4-b548b4b136ef
+
